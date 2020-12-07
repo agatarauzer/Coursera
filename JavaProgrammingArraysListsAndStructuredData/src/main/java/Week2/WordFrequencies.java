@@ -31,11 +31,27 @@ public class WordFrequencies {
         }
     }
 
+    public int findIndexOfMax() {
+        int max = 0;
+        int maxIndex = 0;
+
+        for (int i = 0; i < myFreqs.size(); i++) {
+            if (myFreqs.get(i) > max) {
+                max = myFreqs.get(i);
+                maxIndex = i;
+            }
+        }
+        return maxIndex;
+    }
+
     public void tester() {
         findUnique();
         System.out.println("Unique words:" + myWords.size());
         for (int i = 0; i < myWords.size(); i++) {
             System.out.println(myWords.get(i) + " " + myFreqs.get(i));
         }
+
+        System.out.println("The word that occurs most often and its count are: " +
+        myWords.get(findIndexOfMax()) + " " + myFreqs.get(findIndexOfMax()));
     }
 }
