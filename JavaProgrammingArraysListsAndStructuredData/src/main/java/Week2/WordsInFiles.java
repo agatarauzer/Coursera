@@ -61,5 +61,11 @@ public class WordsInFiles {
         return resultWords;
     }
 
+    public void printFilesIn(String word) {
+        ArrayList<String> filesNames = words.get(word);
 
+        for (int i = 0; i < filesNames.size(); i++) {
+            System.out.println(filesNames.get(i));
+        }
+    }
 }
