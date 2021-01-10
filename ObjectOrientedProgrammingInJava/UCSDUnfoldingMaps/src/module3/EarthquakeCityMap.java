@@ -77,8 +77,12 @@ public class EarthquakeCityMap extends PApplet {
 	    // to create a new SimplePointMarker for each PointFeature in 
 	    // earthquakes.  Then add each new SimplePointMarker to the 
 	    // List markers (so that it will be added to the map in the line below)
-	    
-	    
+
+		for (PointFeature pointFeature : earthquakes) {
+			Marker marker = createMarker(pointFeature);
+			markers.add(marker);
+		}
+
 	    // Add the markers to the map so that they are displayed
 	    map.addMarkers(markers);
 	}
@@ -107,7 +111,7 @@ public class EarthquakeCityMap extends PApplet {
 		
 		// Here is an example of how to use Processing's color method to generate 
 	    // an int that represents the color yellow.  
-	    int yellow = color(255, 255, 0);
+	    //int yellow = color(255, 255, 0);
 		
 		// TODO (Step 4): Add code below to style the marker's size and color 
 	    // according to the magnitude of the earthquake.  
@@ -116,8 +120,23 @@ public class EarthquakeCityMap extends PApplet {
 	    // Rather than comparing the magnitude to a number directly, compare 
 	    // the magnitude to these variables (and change their value in the code 
 	    // above if you want to change what you mean by "moderate" and "light")
-	    
-	    
+
+		int colorOfMarker = color(225, 225, 225);
+		float radius = 5;
+		if (mag < THRESHOLD_LIGHT) {
+			colorOfMarker = color(30, 144, 255);
+		}
+		else if (mag < THRESHOLD_MODERATE) {
+			colorOfMarker = color(255, 255, 0);
+			radius = 10;
+		}
+		else if (mag > THRESHOLD_MODERATE) {
+			colorOfMarker = color(255, 0, 0);
+			radius = 15;
+		}
+		marker.setColor(colorOfMarker);
+		marker.setRadius(radius);
+
 	    // Finally return the marker
 	    return marker;
 	}
@@ -128,12 +147,28 @@ public class EarthquakeCityMap extends PApplet {
 	    addKey();
 	}
 
-
 	// helper method to draw key in GUI
 	// TODO: Implement this method to draw the key
 	private void addKey() 
-	{	
-		// Remember you can use Processing's graphics methods here
-	
+	{
+		fill(220, 220, 220);
+		rect(25, 50, 150, 250);
+
+		fill(0);
+		textAlign(LEFT, CENTER);
+		textSize(12);
+		text("Earthquake Key", 50, 75);
+
+		fill(color(255, 0, 0));
+		ellipse(50, 125, 15, 15);
+		fill(color(255, 255, 0));
+		ellipse(50, 175, 10, 10);
+		fill(color(30, 144, 255));
+		ellipse(50, 225, 5, 5);
+
+		fill(0, 0, 0);
+		text("5.0+ Magnitude", 75, 125);
+		text("4.0+ Magnitude", 75, 175);
+		text("Below 4.0", 75, 225);
 	}
 }
