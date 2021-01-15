@@ -1,7 +1,9 @@
 package module4;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import de.fhpotsdam.unfolding.UnfoldingMap;
 import de.fhpotsdam.unfolding.data.Feature;
@@ -77,7 +79,7 @@ public class EarthquakeCityMap extends PApplet {
 		// FOR TESTING: Set earthquakesURL to be one of the testing files by uncommenting
 		// one of the lines below.  This will work whether you are online or offline
 		//earthquakesURL = "test1.atom";
-		//earthquakesURL = "test2.atom";
+		earthquakesURL = "test2.atom";
 		
 		// WHEN TAKING THIS QUIZ: Uncomment the next line
 		//earthquakesURL = "quiz1.atom";
@@ -182,8 +184,7 @@ public class EarthquakeCityMap extends PApplet {
 	 * ...
 	 * OCEAN QUAKES: numOceanQuakes
 	 * */
-	private void printQuakes() 
-	{
+	private void printQuakes() {
 		// TODO: Implement this method
 		// One (inefficient but correct) approach is to:
 		//   Loop over all of the countries, e.g. using 
@@ -195,7 +196,7 @@ public class EarthquakeCityMap extends PApplet {
 		//     	and (2) if it is on land, that its country property matches 
 		//      the name property of the country marker.   If so, increment
 		//      the country's counter.
-		
+
 		// Here is some code you will find useful:
 		// 
 		//  * To get the name of a country from a country marker in variable cm, use:
@@ -207,13 +208,33 @@ public class EarthquakeCityMap extends PApplet {
 		//       (e.g. isOnLand)
 		//  * If you know your Marker, m, is a LandQuakeMarker, then it has a "country" 
 		//      property set.  You can get the country with:
-		//        String country = (String)m.getProperty("country");
-		
-		
+		//      String country = (String)m.getProperty("country");
+
+		//solution for non alphabetical order
+		Map<String, Integer> quakesPerCountry = new HashMap<>();
+		int oceanQuakesCounter = 0;
+		for (Marker m : quakeMarkers) {
+			EarthquakeMarker em = (EarthquakeMarker) m;
+			if (em.isOnLand()) {
+				String country = (String) m.getProperty("country");
+				if (quakesPerCountry.containsKey(country)) {
+					int num = quakesPerCountry.get(country);
+					quakesPerCountry.put(country, num + 1);
+				} else {
+					quakesPerCountry.put(country, 1);
+				}
+			}
+			else {
+				oceanQuakesCounter++;
+			}
+		}
+
+		for (String country : quakesPerCountry.keySet()) {
+			System.out.println(country + ": " + quakesPerCountry.get(country));
+		}
+		System.out.println("OCEAN QUAKES: " + oceanQuakesCounter);
 	}
-	
-	
-	
+
 	// helper method to test whether a given earthquake is in a given country
 	// This will also add the country property to the properties of the earthquake 
 	// feature if it's in one of the countries.
