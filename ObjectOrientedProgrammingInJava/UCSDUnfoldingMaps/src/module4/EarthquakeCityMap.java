@@ -79,10 +79,10 @@ public class EarthquakeCityMap extends PApplet {
 		// FOR TESTING: Set earthquakesURL to be one of the testing files by uncommenting
 		// one of the lines below.  This will work whether you are online or offline
 		//earthquakesURL = "test1.atom";
-		earthquakesURL = "test2.atom";
+		//earthquakesURL = "test2.atom";
 		
 		// WHEN TAKING THIS QUIZ: Uncomment the next line
-		//earthquakesURL = "quiz1.atom";
+		earthquakesURL = "quiz1.atom";
 		
 		
 		// (2) Reading in earthquake data and geometric properties
@@ -136,28 +136,63 @@ public class EarthquakeCityMap extends PApplet {
 	private void addKey() {	
 		// Remember you can use Processing's graphics methods here
 		fill(255, 250, 240);
-		rect(25, 50, 150, 250);
-		
+		int xPosition = 25;
+		int yPosition = 50;
+
+		rect(xPosition, yPosition, 150, 250);
+
 		fill(0);
 		textAlign(LEFT, CENTER);
-		textSize(12);
-		text("Earthquake Key", 50, 75);
-		
-		fill(color(255, 0, 0));
-		ellipse(50, 125, 15, 15);
-		fill(color(255, 255, 0));
-		ellipse(50, 175, 10, 10);
-		fill(color(0, 0, 255));
-		ellipse(50, 225, 5, 5);
-		
+		textSize(11);
+		text("Earthquake Key", xPosition+25, yPosition+25);
+
+		fill(150, 30, 30);
+		int triangleX = xPosition + 35;
+		int triangleY = yPosition + 50;
+		triangle(triangleX, triangleY- module5.CityMarker.TRI_SIZE, triangleX- module5.CityMarker.TRI_SIZE,
+				triangleY+ module5.CityMarker.TRI_SIZE, triangleX+ module5.CityMarker.TRI_SIZE,
+				triangleY+ module5.CityMarker.TRI_SIZE);
+
 		fill(0, 0, 0);
-		text("5.0+ Magnitude", 75, 125);
-		text("4.0+ Magnitude", 75, 175);
-		text("Below 4.0", 75, 225);
+		textAlign(LEFT, CENTER);
+		text("City Marker",triangleX + 15, triangleY);
+
+		fill(0, 0, 0);
+		textAlign(LEFT, CENTER);
+		text("City Marker", triangleX + 15, triangleY);
+
+		text("Land Quake", xPosition + 50, yPosition + 70);
+		text("Ocean Quake", xPosition + 50, yPosition + 90);
+		text("Size ~ Magnitude", xPosition + 25, yPosition + 110);
+
+		fill(255, 255, 255);
+		ellipse(xPosition + 35,
+				yPosition + 70,
+				10,
+				10);
+		rect(xPosition + 35 - 5, yPosition + 90 - 5, 10, 10);
+
+		fill(color(255, 255, 102));
+		ellipse(xPosition+35, yPosition+140, 12, 12);
+		fill(color(0, 0, 205));
+		ellipse(xPosition+35, yPosition+160, 12, 12);
+		fill(color(220, 20, 60));
+		ellipse(xPosition+35, yPosition+180, 12, 12);
+
+		textAlign(LEFT, CENTER);
+		fill(0, 0, 0);
+		text("Shallow", xPosition + 50, yPosition + 140);
+		text("Intermediate", xPosition + 50, yPosition + 160);
+		text("Deep", xPosition + 50, yPosition + 180);
+
+		text("Past hour", xPosition + 50, yPosition + 200);
+
+		fill(255, 255, 255);
+		int centerx = xPosition + 35;
+		int centery = yPosition + 200;
+		ellipse(centerx, centery, 12, 12);
 	}
 
-	
-	
 	// Checks whether this quake occurred on land.  If it did, it sets the 
 	// "country" property of its PointFeature to the country where it occurred
 	// and returns true.  Notice that the helper method isInCountry will

@@ -31,9 +31,9 @@ public class LandQuakeMarker extends EarthquakeMarker {
 		
 		// HINT: Notice the radius variable in the EarthquakeMarker class
 		// and how it is set in the EarthquakeMarker constructor
-		
 		// TODO: Implement this method
-		
+
+		pg.ellipse(x, y, 2 * radius, 2 * radius);
 	}
 	
 
@@ -41,8 +41,4 @@ public class LandQuakeMarker extends EarthquakeMarker {
 	public String getCountry() {
 		return (String) getProperty("country");
 	}
-
-
-
-		
 }
