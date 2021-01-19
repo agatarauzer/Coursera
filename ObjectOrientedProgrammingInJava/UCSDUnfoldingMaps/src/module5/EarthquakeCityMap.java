@@ -8,6 +8,7 @@ import de.fhpotsdam.unfolding.data.Feature;
 import de.fhpotsdam.unfolding.data.GeoJSONReader;
 import de.fhpotsdam.unfolding.data.PointFeature;
 import de.fhpotsdam.unfolding.geo.Location;
+import de.fhpotsdam.unfolding.marker.AbstractMarker;
 import de.fhpotsdam.unfolding.marker.AbstractShapeMarker;
 import de.fhpotsdam.unfolding.marker.Marker;
 import de.fhpotsdam.unfolding.marker.MultiMarker;
@@ -146,8 +147,18 @@ public class EarthquakeCityMap extends PApplet {
 	private void selectMarkerIfHover(List<Marker> markers)
 	{
 		// TODO: Implement this method
+		if (lastSelected != null) {
+			return;
+		}
+		for (Marker marker : markers) {
+			if (marker.isInside(map, mouseX, mouseY)) {
+				lastSelected =  (CommonMarker) marker;
+				lastSelected.setSelected(true);
+				return;
+			}
+		}
 	}
-	
+
 	/** The event handler for mouse clicks
 	 * It will display an earthquake and its threat circle of cities
 	 * Or if a city is clicked, it will display all the earthquakes 
@@ -223,8 +234,6 @@ public class EarthquakeCityMap extends PApplet {
 		text("Intermediate", xbase+50, ybase+160);
 		text("Deep", xbase+50, ybase+180);
 
-		text("Past hour", xbase+50, ybase+200);
-		
 		fill(255, 255, 255);
 		int centerx = xbase+35;
 		int centery = ybase+200;
