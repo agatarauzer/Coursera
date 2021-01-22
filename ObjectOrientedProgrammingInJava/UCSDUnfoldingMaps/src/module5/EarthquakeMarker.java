@@ -38,11 +38,9 @@ public abstract class EarthquakeMarker extends CommonMarker
 
 	// ADD constants for colors if you want
 
-	
 	// abstract method implemented in derived classes
 	public abstract void drawEarthquake(PGraphics pg, float x, float y);
-		
-	
+
 	// constructor
 	public EarthquakeMarker (PointFeature feature) 
 	{
@@ -54,7 +52,6 @@ public abstract class EarthquakeMarker extends CommonMarker
 		setProperties(properties);
 		this.radius = 1.75f*getMagnitude();
 	}
-	
 
 	// calls abstract method drawEarthquake and then checks age and draws X if needed
 	@Override
@@ -97,12 +94,11 @@ public abstract class EarthquakeMarker extends CommonMarker
 		// TODO: Implement this method
 		pg.pushStyle();
 		pg.textAlign(PConstants.LEFT, PConstants.TOP);
-		pg.fill(0);
+		pg.fill(255, 255, 255);
 		pg.text(getTitle(), x + 3 , y + 18);
 		pg.popStyle();
 	}
 
-	
 	/**
 	 * Return the "threat circle" radius, or distance up to 
 	 * which this earthquake can affect things, for this earthquake.   
@@ -131,8 +127,7 @@ public abstract class EarthquakeMarker extends CommonMarker
 			pg.fill(255, 0, 0);
 		}
 	}
-	
-	
+
 	/*
 	 * getters for earthquake properties
 	 */
@@ -158,8 +153,4 @@ public abstract class EarthquakeMarker extends CommonMarker
 	{
 		return isOnLand;
 	}
-	
-
-	
-	
 }

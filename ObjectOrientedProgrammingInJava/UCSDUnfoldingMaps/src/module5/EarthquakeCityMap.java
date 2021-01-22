@@ -115,13 +115,11 @@ public class EarthquakeCityMap extends PApplet {
 	    map.addMarkers(cityMarkers);
 	    
 	}  // End setup
-	
-	
+
 	public void draw() {
 		background(0);
 		map.draw();
 		addKey();
-		
 	}
 	
 	/** Event handler that gets called automatically when the 
@@ -171,9 +169,102 @@ public class EarthquakeCityMap extends PApplet {
 		// Hint: You probably want a helper method or two to keep this code
 		// from getting too long/disorganized
 
+		if (lastClicked != null) {
+			unhideMarkers();
+			lastClicked = null;
+		}
+
+		else {
+			Marker selectedEarthquakeMarker = findSelectedEarthquakeMarker();
+			Marker selectedCityMarker = findSelectedCityMarker();
+
+			if (selectedEarthquakeMarker != null) {
+				System.out.println(selectedEarthquakeMarker.getProperty("title"));
+				showCitiesForEarthquakeMarker(selectedEarthquakeMarker);
+				return;
+			}
+			if (selectedCityMarker != null) {
+				System.out.println(selectedCityMarker.getProperty("name"));
+				showEarthquakesForCityMarker(selectedCityMarker);
+				return;
+			}
+		}
 	}
-	
-	
+
+	//helper method to find selected earthquake marker
+	private CommonMarker findSelectedEarthquakeMarker() {
+		for (Marker marker : quakeMarkers) {
+			if (marker.isInside(map, mouseX, mouseY)) {
+				lastClicked = (CommonMarker) marker;
+				((CommonMarker) marker).setClicked(true);
+				return (CommonMarker) marker;
+			}
+		}
+		return null;
+	}
+
+	//helper method to find selected city marker
+	private CommonMarker findSelectedCityMarker() {
+		for (Marker marker : cityMarkers) {
+			if (marker.isInside(map, mouseX, mouseY)) {
+				lastClicked = (CommonMarker) marker;
+				((CommonMarker) marker).setClicked(true);
+				return (CommonMarker) marker;
+			}
+		}
+		return null;
+	}
+
+	//helper method to display cities if earthquake is clicked
+	private void showCitiesForEarthquakeMarker(Marker earthquakeMarker) {
+		EarthquakeMarker markerQ = (EarthquakeMarker) earthquakeMarker;
+		Location locationOfQuake = markerQ.getLocation();
+		double circleDis = markerQ.threatCircle();
+		System.out.println(circleDis);
+
+		for (Marker marker : cityMarkers) {
+			double distanceToQuake = marker.getDistanceTo(locationOfQuake);
+			if (distanceToQuake <= circleDis) {
+				marker.setHidden(false);
+			}
+			else {
+				marker.setHidden(true);
+			}
+		}
+		for (Marker marker : quakeMarkers) {
+			if (marker == earthquakeMarker) {
+				marker.setHidden(false);
+			} else {
+				marker.setHidden(true);
+			}
+		}
+	}
+
+	//helper method to display quakes if earthquake is clicked
+	private void showEarthquakesForCityMarker(Marker cityMarker) {
+		Location locationOfCity = cityMarker.getLocation();
+
+		for (Marker marker : quakeMarkers) {
+			double distanceToCity = marker.getDistanceTo(locationOfCity);
+			EarthquakeMarker markerQ = (EarthquakeMarker) marker;
+			double circleDis = markerQ.threatCircle();
+			if (distanceToCity <= circleDis) {
+				marker.setHidden(false);
+			}
+			else {
+				marker.setHidden(true);
+			}
+		}
+		for (Marker marker : cityMarkers) {
+			if (marker == cityMarker) {
+				marker.setHidden(false);
+			}
+			else {
+				marker.setHidden(true);
+			}
+		}
+	}
+
 	// loop over and unhide all markers
 	private void unhideMarkers() {
 		for(Marker marker : quakeMarkers) {
@@ -184,7 +275,7 @@ public class EarthquakeCityMap extends PApplet {
 			marker.setHidden(false);
 		}
 	}
-	
+
 	// helper method to draw key in GUI
 	private void addKey() {	
 		// Remember you can use Processing's graphics methods here
@@ -245,11 +336,8 @@ public class EarthquakeCityMap extends PApplet {
 		strokeWeight(2);
 		line(centerx-8, centery-8, centerx+8, centery+8);
 		line(centerx-8, centery+8, centerx+8, centery-8);
-			
 	}
 
-	
-	
 	// Checks whether this quake occurred on land.  If it did, it sets the 
 	// "country" property of its PointFeature to the country where it occurred
 	// and returns true.  Notice that the helper method isInCountry will
@@ -267,7 +355,8 @@ public class EarthquakeCityMap extends PApplet {
 		// not inside any country
 		return false;
 	}
-	
+
+
 	// prints countries with number of earthquakes
 	private void printQuakes() {
 		int totalWaterQuakes = quakeMarkers.size();
@@ -290,8 +379,7 @@ public class EarthquakeCityMap extends PApplet {
 		}
 		System.out.println("OCEAN QUAKES: " + totalWaterQuakes);
 	}
-	
-	
+
 	
 	// helper method to test whether a given earthquake is in a given country
 	// This will also add the country property to the properties of the earthquake feature if 
@@ -326,5 +414,4 @@ public class EarthquakeCityMap extends PApplet {
 		}
 		return false;
 	}
-
 }

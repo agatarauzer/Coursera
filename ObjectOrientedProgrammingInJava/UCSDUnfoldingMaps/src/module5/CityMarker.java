@@ -23,15 +23,13 @@ public class CityMarker extends CommonMarker {
 	public CityMarker(Location location) {
 		super(location);
 	}
-	
-	
+
 	public CityMarker(Feature city) {
 		super(((PointFeature)city).getLocation(), city.getProperties());
 		// Cities have properties: "name" (city name), "country" (country name)
 		// and "population" (population, in millions)
 	}
 
-	
 	/**
 	 * Implementation of method to draw marker on the map.
 	 */
@@ -62,9 +60,7 @@ public class CityMarker extends CommonMarker {
 		pg.text(cityPopulation, x + 3, y - TRI_SIZE - 18);
 		pg.popStyle();
 	}
-	
-	
-	
+
 	/* Local getters for some city properties.  
 	 */
 	public String getCity()
