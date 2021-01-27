@@ -2,6 +2,7 @@ package module6;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.List;
 
 import de.fhpotsdam.unfolding.UnfoldingMap;
@@ -85,7 +86,7 @@ public class EarthquakeCityMap extends PApplet {
 		//earthquakesURL = "test2.atom";
 		
 		// Uncomment this line to take the quiz
-		//earthquakesURL = "quiz2.atom";
+		earthquakesURL = "quiz2.atom";
 		
 		
 		// (2) Reading in earthquake data and geometric properties
@@ -117,6 +118,9 @@ public class EarthquakeCityMap extends PApplet {
 
 	    // could be used for debugging
 	    printQuakes();
+
+	    //print quakes sorted in reverse order of their magnitude
+		sortAndPrint(50);
 	 		
 	    // (3) Add markers to map
 	    //     NOTE: Country markers are not added to the map.  They are used
@@ -137,7 +141,18 @@ public class EarthquakeCityMap extends PApplet {
 	
 	
 	// TODO: Add the method:
-	//   private void sortAndPrint(int numToPrint)
+	private void sortAndPrint(int numToPrint) {
+		Object[] quakes = quakeMarkers.toArray();
+		Arrays.sort(quakes, Collections.reverseOrder());
+
+		if (numToPrint > quakes.length) {
+			numToPrint = quakes.length;
+		}
+		for(int i = 0; i < numToPrint; i++) {
+			System.out.println(quakes[i]);
+		}
+	}
+
 	// and then call that method from setUp
 	
 	/** Event handler that gets called automatically when the 
@@ -409,5 +424,4 @@ public class EarthquakeCityMap extends PApplet {
 		}
 		return false;
 	}
-
 }
