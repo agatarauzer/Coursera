@@ -34,7 +34,7 @@ public abstract class Document {
 		ArrayList<String> tokens = new ArrayList<String>();
 		Pattern tokSplitter = Pattern.compile(pattern);
 		Matcher m = tokSplitter.matcher(text);
-		
+		//int i = 0;
 		while (m.find()) {
 			tokens.add(m.group());
 		}
@@ -58,7 +58,7 @@ public abstract class Document {
 	 * @param word  The word to count the syllables in
 	 * @return The number of syllables in the given word, according to 
 	 * this rule: Each contiguous sequence of one or more vowels is a syllable, 
-	 *       with the following exception: a lone "e" at the end of a word 
+	 *       with the following exception: alone "e" at the end of a word
 	 *       is not considered a syllable unless the word has no other syllables. 
 	 *       You should consider y a vowel.
 	 */
@@ -67,8 +67,49 @@ public abstract class Document {
 		// TODO: Implement this method so that you can call it from the 
 	    // getNumSyllables method in BasicDocument (module 2) and 
 	    // EfficientDocument (module 3).
-	    return 0;
+
+		if (word.length() == 1) {
+			if (isVowel(word.charAt(0))) {
+				return 1;
+			}
+			else return 0;
+		}
+		int counter = 0;
+		for (int i = 0; i < word.length(); i++) {
+			char testedChar = word.toLowerCase().charAt(i);
+			if (isVowel(testedChar)) {
+				if (i == word.length() - 1) {
+					char previousChar = word.toLowerCase().charAt(i-1);
+					if (testedChar == 'e' && counter == 0) {
+						counter++;
+					}
+					if (testedChar == 'e' && isVowel(previousChar)) {
+						counter++;
+					}
+					if (testedChar != 'e' ) {
+						counter++;
+					}
+					break;
+				}
+				char nextChar = word.toLowerCase().charAt(i+1);
+				if (!isVowel(nextChar)) {
+						counter++;
+					}
+				if (isVowel(nextChar)) {
+						continue;
+					}
+			}
+		}
+		return counter;
 	}
+
+	private boolean isVowel(char ch) {
+		if (ch == 'a' || ch == 'e' || ch == 'i' || ch == 'o' || ch == 'u' || ch == 'y') {
+			return true;
+		}
+		return false;
+	}
+
 	
 	/** A method for testing
 	 * 
@@ -132,9 +173,10 @@ public abstract class Document {
 	{
 	    // TODO: You will play with this method in week 1, and 
 		// then implement it in week 2
-	    return text.length();
+
+		double wordsPerSentences = (double)getNumWords() / getNumSentences();
+		double syllablesPerWords = (double)getNumSyllables() / getNumWords();
+		double fleschScore = 206.835 - (1.015 * (wordsPerSentences)) - (84.6 * syllablesPerWords);
+	    return fleschScore;
 	}
-	
-	
-	
 }
