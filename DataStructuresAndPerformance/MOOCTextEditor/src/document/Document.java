@@ -34,7 +34,6 @@ public abstract class Document {
 		ArrayList<String> tokens = new ArrayList<String>();
 		Pattern tokSplitter = Pattern.compile(pattern);
 		Matcher m = tokSplitter.matcher(text);
-		//int i = 0;
 		while (m.find()) {
 			tokens.add(m.group());
 		}

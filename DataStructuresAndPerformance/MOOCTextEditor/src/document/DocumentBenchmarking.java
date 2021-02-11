@@ -20,7 +20,7 @@ public class DocumentBenchmarking {
 	    int trials = 100;
 
 	    // The text to test on
-	    String textfile = "data/warAndPeace.txt";
+	    String textfile = "DataStructuresAndPerformance/MOOCTextEditor/data/warAndPeace.txt";
 		
 	    // The amount of characters to increment each step
 	    // You can play around with this
@@ -37,6 +37,8 @@ public class DocumentBenchmarking {
 		// TODO: Fill in the rest of this method so that it runs two loops
 		// and prints out timing results as described in the assignment 
 		// instructions and following the pseudocode below.
+
+		System.out.println("NumberOfChars\tBasicTime\tEfiicientTime");
 		for (int numToCheck = start; numToCheck < numSteps*increment + start; 
 				numToCheck += increment)
 		{
@@ -57,8 +59,32 @@ public class DocumentBenchmarking {
 			 *     b. Calls fleshScore on this document
 			 * 6. Print out the time it took to complete the loop in step 5 
 			 *      (on the same line as the first print statement) followed by a newline (\n) 
-			 */  
-			 
+			 */
+
+			System.out.print(numToCheck + "\t");
+			String text = getStringFromFile(textfile, numToCheck);
+
+			int j = trials;
+			long startBD = System.nanoTime();
+			while (j > 0) {
+				BasicDocument basicDocument = new BasicDocument(text);
+				basicDocument.getFleschScore();
+				j--;
+			}
+			long endBD = System.nanoTime();
+			double resultBD = (endBD - startBD) / 1000000000.0;
+			System.out.print(resultBD + "\t");
+
+			int k = trials;
+			long startED = System.nanoTime();
+			while (k > 0) {
+				EfficientDocument efficientDocument = new EfficientDocument(text);
+				efficientDocument.getFleschScore();
+				k--;
+			}
+			long endED = System.nanoTime();
+			double resultED = (endED - startED) / 1000000000.0;
+			System.out.println(resultED);
 		}
 	
 	}
@@ -92,9 +118,6 @@ public class DocumentBenchmarking {
 		  System.out.println(e);
 		  System.exit(0);
 		}
-		
-		
 		return s.toString();
 	}
-	
 }
