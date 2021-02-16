@@ -7,6 +7,7 @@ import static org.junit.Assert.*;
 
 import java.util.LinkedList;
 
+import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -61,7 +62,7 @@ public class MyLinkedListTester {
 		catch (IndexOutOfBoundsException e) {
 			
 		}
-		
+
 		// test short list, first contents, then out of bounds
 		assertEquals("Check first", "A", shortList.get(0));
 		assertEquals("Check second", "B", shortList.get(1));
@@ -124,7 +125,34 @@ public class MyLinkedListTester {
 	public void testAddEnd()
 	{
         // TODO: implement this test
-		
+
+		//test adding null element, add should throw an exception
+		try {
+			shortList.add(null);
+			fail("Null element");
+		}
+		catch (NullPointerException e) {
+
+		}
+
+		//test adding element to a empty list, should return true;
+		// get method should return these element
+		int element1 = 78;
+		boolean result1 = emptyList.add(element1);
+		int resultElement1 = emptyList.get(0);
+
+		Assert.assertTrue("Add to empty list: ", result1);
+		Assert.assertEquals("Add: check element" + element1 + " was added to empty list: ", 78, resultElement1);
+
+		//test adding element to already filled list, should return true;
+		//get method should return these element
+		int element2 = 33;
+		boolean result2 = longerList.add(element2);
+		int resultElement2 = longerList.get(10);
+
+		Assert.assertTrue("Add element to filled list: ", result2);
+		Assert.assertEquals("Add: check element" + element2 + " was added to filled list: ", 33, resultElement2);
+
 	}
 
 	
