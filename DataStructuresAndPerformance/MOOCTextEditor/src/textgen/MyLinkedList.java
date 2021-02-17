@@ -32,7 +32,10 @@ public class MyLinkedList<E> extends AbstractList<E> {
 	{
 		// TODO: Implement this method
 
-		if (element == null) {
+		add(size, element);
+		return true;
+
+		/*if (element == null) {
 			throw new NullPointerException();
 		}
 
@@ -52,6 +55,8 @@ public class MyLinkedList<E> extends AbstractList<E> {
 		}
 		size++;
 		return true;
+		*/
+
 	}
 
 	/** Get the element at position index 
@@ -60,7 +65,7 @@ public class MyLinkedList<E> extends AbstractList<E> {
 	{
 		// TODO: Implement this method.
 
-		if (index < 0 || index >= size ) {
+		if (index < 0 || index >= size) {
 			throw new IndexOutOfBoundsException();
 		}
 
@@ -85,6 +90,43 @@ public class MyLinkedList<E> extends AbstractList<E> {
 	public void add(int index, E element ) 
 	{
 		// TODO: Implement this method
+
+		if (element == null) {
+			throw new NullPointerException();
+		}
+
+		if (index < 0 || index > size) {
+			throw new IndexOutOfBoundsException();
+		}
+
+		LLNode newNode = new LLNode(element);
+		//System.out.println("New node: " + newNode);
+
+		if (size == 0) {
+			head.next = newNode;
+			newNode.prev = head;
+			tail.prev = newNode;
+			newNode.next = tail;
+			size++;
+			return;
+		}
+
+		LLNode current = head.next;
+
+		int i = 0;
+		while ( i < index && current.next != null ) {
+			current = current.next;
+			//System.out.println("Current node: " + current);
+			i++;
+		}
+
+		LLNode previous = current.prev;
+		//System.out.println("Prev node:" + previous);
+
+		current.prev = newNode;
+		newNode.next = current;
+		previous.next = newNode;
+		size++;
 	}
 
 
@@ -92,7 +134,7 @@ public class MyLinkedList<E> extends AbstractList<E> {
 	public int size() 
 	{
 		// TODO: Implement this method
-		return -1;
+		return size;
 	}
 
 	/** Remove a node at the specified index and return its data element.
@@ -118,7 +160,7 @@ public class MyLinkedList<E> extends AbstractList<E> {
 	{
 		// TODO: Implement this method
 		return null;
-	}   
+	}
 }
 
 class LLNode<E> 
@@ -137,4 +179,7 @@ class LLNode<E>
 		this.next = null;
 	}
 
+	public String toString() {
+		return data.toString();
+	}
 }

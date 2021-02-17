@@ -141,8 +141,8 @@ public class MyLinkedListTester {
 		boolean result1 = emptyList.add(element1);
 		int resultElement1 = emptyList.get(0);
 
-		Assert.assertTrue("Add to empty list: ", result1);
-		Assert.assertEquals("Add: check element" + element1 + " was added to empty list: ", 78, resultElement1);
+		Assert.assertTrue("Add: to empty list: ", result1);
+		Assert.assertEquals("Add: element " + element1 + " to empty list: ", 78, resultElement1);
 
 		//test adding element to already filled list, should return true;
 		//get method should return these element
@@ -150,8 +150,8 @@ public class MyLinkedListTester {
 		boolean result2 = longerList.add(element2);
 		int resultElement2 = longerList.get(10);
 
-		Assert.assertTrue("Add element to filled list: ", result2);
-		Assert.assertEquals("Add: check element" + element2 + " was added to filled list: ", 33, resultElement2);
+		Assert.assertTrue("Add: element to filled list: ", result2);
+		Assert.assertEquals("Add: element " + element2 + " to filled list: ", 33, resultElement2);
 
 	}
 
@@ -161,6 +161,22 @@ public class MyLinkedListTester {
 	public void testSize()
 	{
 		// TODO: implement this test
+
+		//size after adding elements
+		longerList.add(45);
+		longerList.add(22);
+		longerList.add(33);
+		Assert.assertEquals("Size: longer list with 3 more elements", 13, longerList.size());
+
+		//size after removing elements
+
+
+
+
+
+		//size of empty list
+		Assert.assertEquals("Size: empty list", 0, emptyList.size());
+
 	}
 
 	
@@ -173,7 +189,53 @@ public class MyLinkedListTester {
 	public void testAddAtIndex()
 	{
         // TODO: implement this test
-		
+
+		try {
+			shortList.add(1,null);
+			fail("Null element");
+		}
+		catch (NullPointerException e) {
+
+		}
+
+		try {
+			longerList.add(-2, 7);
+			fail("Invalid index");
+		}
+		catch (IndexOutOfBoundsException e) {
+
+		}
+
+		try {
+			longerList.add(45, 5);
+			fail("Invalid index");
+		}
+		catch (IndexOutOfBoundsException e) {
+
+		}
+
+		//add to empty list
+		emptyList.add(0,888);
+		Assert.assertEquals("Add at index: to empty list", (Integer) 888, emptyList.get(0));
+
+
+		// test if get method returns added element
+		//in the middle of the list
+		longerList.add(5, 99);
+		Assert.assertEquals("Add at index: element 99 was added to list: ", (Integer) 99, longerList.get(5));
+
+		//in the beginning of the list
+		longerList.add(0, 77);
+		Assert.assertEquals("Add at index: element 77 was added to list: ", (Integer) 77, longerList.get(0));
+
+		//in the end of the list
+		shortList.add(2, "C");
+		Assert.assertEquals("Add at index: element C was added to list: ", "C", shortList.get(2));
+
+		//check size
+		Assert.assertEquals("Add at index: size of longer list: ", 12, longerList.size());
+		Assert.assertEquals("Add at index: size of short list: ", 3, shortList.size());
+
 	}
 	
 	/** Test setting an element in the list */
