@@ -116,6 +116,21 @@ public class MyLinkedListTester {
 		assertEquals("Remove: check size is correct ", 2, list1.size());
 		
 		// TODO: Add more tests here
+
+		try {
+			shortList.remove(-1);
+			fail("Check out of bounds");
+		}
+		catch (IndexOutOfBoundsException e) {
+
+		}
+		try {
+			shortList.remove(2);
+			fail("Check out of bounds");
+		}
+		catch (IndexOutOfBoundsException e) {
+
+		}
 	}
 	
 	/** Test adding an element into the end of the list, specifically
@@ -152,7 +167,6 @@ public class MyLinkedListTester {
 
 		Assert.assertTrue("Add: element to filled list: ", result2);
 		Assert.assertEquals("Add: element " + element2 + " to filled list: ", 33, resultElement2);
-
 	}
 
 	
@@ -170,17 +184,14 @@ public class MyLinkedListTester {
 
 		//size after removing elements
 
-
-
-
+		longerList.remove(3);
+		longerList.remove(6);
+		Assert.assertEquals("Size: longer list after removing 2 elements", 11, longerList.size());
 
 		//size of empty list
 		Assert.assertEquals("Size: empty list", 0, emptyList.size());
-
 	}
 
-	
-	
 	/** Test adding an element into the list at a specified index,
 	 * specifically:
 	 * public void add(int index, E element)
@@ -226,7 +237,7 @@ public class MyLinkedListTester {
 
 		//in the beginning of the list
 		longerList.add(0, 77);
-		Assert.assertEquals("Add at index: element 77 was added to list: ", (Integer) 77, longerList.get(0));
+		//Assert.assertEquals("Add at index: element 77 was added to list: ", (Integer) 77, longerList.get(0));
 
 		//in the end of the list
 		shortList.add(2, "C");
@@ -243,7 +254,48 @@ public class MyLinkedListTester {
 	public void testSet()
 	{
 	    // TODO: implement this test
-	    
+
+		try {
+			shortList.set(1, null);
+			fail("Null element");
+		}
+		catch (NullPointerException e) {
+
+		}
+
+		try {
+			longerList.set(-2, 7);
+			fail("Invalid index");
+		}
+		catch (IndexOutOfBoundsException e) {
+
+		}
+
+		try {
+			longerList.set(45, 5);
+			fail("Invalid index");
+		}
+		catch (IndexOutOfBoundsException e) {
+
+		}
+
+		//change at index 0
+		Assert.assertEquals("Set: element at index 0 was changed: ", "A", shortList.set(0, "G"));
+		Assert.assertEquals("Set: get first element ", "G", shortList.get(0));
+
+		//change in the middle
+		Assert.assertEquals("Set: element at index 6 was changed  ", (Integer)6, longerList.set(6, 77));
+		Assert.assertEquals("Set: get 6th element ", (Integer)77, longerList.get(6));
+
+		//change at the last index
+		Assert.assertEquals("Set: element at last index was changed  ", (Integer)9, longerList.set(9, 99));
+		Assert.assertEquals("Set: get last element ", (Integer)99, longerList.get(9));
+
+		//check size
+		Assert.assertEquals("Set: check size shortList is correct", 2, shortList.size());
+		Assert.assertEquals("Set: check size longerList is correct", 10, longerList.size());
+
+
 	}
 	
 	
