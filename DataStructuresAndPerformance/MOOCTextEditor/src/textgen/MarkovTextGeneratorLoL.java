@@ -1,7 +1,5 @@
 package textgen;
 
-import org.w3c.dom.NodeList;
-
 import java.util.*;
 
 /** 
@@ -32,17 +30,12 @@ public class MarkovTextGeneratorLoL implements MarkovTextGenerator {
 	public void train(String sourceText)
 	{
 		// TODO: Implement this method
-		String[] words = sourceText.toLowerCase().split("[^a-z]+");
+		String[] words = sourceText.split("\\s+");
 		starter = words[0];
 		String prevWord = starter;
 		for (int i = 1; i < words.length; i++) {
-			//for the last element, set starter to be a next word
-			if (i == words.length - 1) {
-				prevWord = words[i];
-				words[i] = starter;
-			}
 			//if prevWord is already a node, add word to next words
-			ListNode node = isWordANode(prevWord);
+			ListNode node = checkNode(prevWord);
 			if (node != null) {
 				node.addNextWord(words[i]);
 			}
@@ -55,31 +48,45 @@ public class MarkovTextGeneratorLoL implements MarkovTextGenerator {
 			}
 			prevWord = words[i];
 		}
-		System.out.println(wordList.toString());
-	}
-
-
-
-
-	private ListNode isWordANode(String word) {
-
-		for (ListNode node : wordList) {
-			if (node.getWord().equals(word)) {
-				return node;
-			}
+		//for the last word, next word is starter (first word)
+		ListNode node = checkNode(prevWord);
+		if (node != null) {
+			node.addNextWord(starter);
 		}
-		return null;
+		else {
+			ListNode newNode = new ListNode(prevWord);
+			newNode.addNextWord(starter);
+			wordList.add(newNode);
+		}
 	}
-	
+
 	/** 
 	 * Generate the number of words requested.
 	 */
 	@Override
 	public String generateText(int numWords) {
 	    // TODO: Implement this method
-		return null;
+
+		if (wordList.isEmpty()) {
+			return "";
+		}
+		if (numWords == 0) {
+			return "";
+		}
+		String currWord = starter;
+		String output  = "";
+		output += currWord;
+
+		while (numWords > 1) {
+			ListNode node = checkNode(currWord);
+			String randomWord = node.getRandomNextWord(rnGenerator);
+			output += " " + randomWord;
+			currWord = randomWord;
+			numWords--;
+		}
+		return output.trim();
 	}
-	
+
 	
 	// Can be helpful for debugging
 	@Override
@@ -98,11 +105,24 @@ public class MarkovTextGeneratorLoL implements MarkovTextGenerator {
 	public void retrain(String sourceText)
 	{
 		// TODO: Implement this method.
+		wordList.clear();
+		starter = "";
+		train(sourceText);
 	}
-	
+
+
 	// TODO: Add any private helper methods you need here.
-	
-	
+
+	private ListNode checkNode(String word) {
+		for (ListNode node : wordList) {
+			if (node.getWord().equals(word)) {
+				return node;
+			}
+		}
+		return null;
+	}
+
+
 	/**
 	 * This is a minimal set of tests.  Note that it can be difficult
 	 * to test methods/classes with randomized behavior.   
@@ -115,10 +135,9 @@ public class MarkovTextGeneratorLoL implements MarkovTextGenerator {
 		String textString = "Hello.  Hello there.  This is a test.  Hello there.  Hello Bob.  Test again.";
 		System.out.println(textString);
 		gen.train(textString);
-		//System.out.println(gen);
-		//System.out.println(gen.generateText(20));
-		//String textString2 = "You say yes, I say no, "+
-		/*
+		System.out.println(gen);
+		System.out.println(gen.generateText(20));
+		String textString2 = "You say yes, I say no, "+
 				"You say stop, and I say go, go, go, "+
 				"Oh no. You say goodbye and I say hello, hello, hello, "+
 				"I don't know why you say goodbye, I say hello, hello, hello, "+
@@ -142,11 +161,11 @@ public class MarkovTextGeneratorLoL implements MarkovTextGenerator {
 				"I don't know why you say goodbye, I say hello, hello, hello, "+
 				"I don't know why you say goodbye, I say hello, hello, hello, "+
 				"I don't know why you say goodbye, I say hello, hello, hello,";
-				*/
-		//System.out.println(textString2);
-		//gen.retrain(textString2);
-		//System.out.println(gen);
-		//System.out.println(gen.generateText(20));
+
+		System.out.println(textString2);
+		gen.retrain(textString2);
+		System.out.println(gen);
+		System.out.println(gen.generateText(5));
 	}
 
 }
@@ -182,7 +201,9 @@ class ListNode
 		// TODO: Implement this method
 	    // The random number generator should be passed from 
 	    // the MarkovTextGeneratorLoL class
-	    return null;
+
+		int i = generator.nextInt(nextWords.size());
+		return nextWords.get(i);
 	}
 
 	public String toString()
