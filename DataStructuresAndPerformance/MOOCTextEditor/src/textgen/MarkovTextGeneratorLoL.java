@@ -1,9 +1,8 @@
 package textgen;
 
-import java.util.LinkedList;
-import java.util.List;
-import java.util.ListIterator;
-import java.util.Random;
+import org.w3c.dom.NodeList;
+
+import java.util.*;
 
 /** 
  * An implementation of the MTG interface that uses a list of lists.
@@ -33,6 +32,43 @@ public class MarkovTextGeneratorLoL implements MarkovTextGenerator {
 	public void train(String sourceText)
 	{
 		// TODO: Implement this method
+		String[] words = sourceText.toLowerCase().split("[^a-z]+");
+		starter = words[0];
+		String prevWord = starter;
+		for (int i = 1; i < words.length; i++) {
+			//for the last element, set starter to be a next word
+			if (i == words.length - 1) {
+				prevWord = words[i];
+				words[i] = starter;
+			}
+			//if prevWord is already a node, add word to next words
+			ListNode node = isWordANode(prevWord);
+			if (node != null) {
+				node.addNextWord(words[i]);
+			}
+			// if prevWord is not a node, add new node with this word, add next word and then
+			//save the node in the wordList
+			else {
+				ListNode newNode = new ListNode(prevWord);
+				newNode.addNextWord(words[i]);
+				wordList.add(newNode);
+			}
+			prevWord = words[i];
+		}
+		System.out.println(wordList.toString());
+	}
+
+
+
+
+	private ListNode isWordANode(String word) {
+
+		for (ListNode node : wordList) {
+			if (node.getWord().equals(word)) {
+				return node;
+			}
+		}
+		return null;
 	}
 	
 	/** 
@@ -79,9 +115,10 @@ public class MarkovTextGeneratorLoL implements MarkovTextGenerator {
 		String textString = "Hello.  Hello there.  This is a test.  Hello there.  Hello Bob.  Test again.";
 		System.out.println(textString);
 		gen.train(textString);
-		System.out.println(gen);
-		System.out.println(gen.generateText(20));
-		String textString2 = "You say yes, I say no, "+
+		//System.out.println(gen);
+		//System.out.println(gen.generateText(20));
+		//String textString2 = "You say yes, I say no, "+
+		/*
 				"You say stop, and I say go, go, go, "+
 				"Oh no. You say goodbye and I say hello, hello, hello, "+
 				"I don't know why you say goodbye, I say hello, hello, hello, "+
@@ -105,10 +142,11 @@ public class MarkovTextGeneratorLoL implements MarkovTextGenerator {
 				"I don't know why you say goodbye, I say hello, hello, hello, "+
 				"I don't know why you say goodbye, I say hello, hello, hello, "+
 				"I don't know why you say goodbye, I say hello, hello, hello,";
-		System.out.println(textString2);
-		gen.retrain(textString2);
-		System.out.println(gen);
-		System.out.println(gen.generateText(20));
+				*/
+		//System.out.println(textString2);
+		//gen.retrain(textString2);
+		//System.out.println(gen);
+		//System.out.println(gen.generateText(20));
 	}
 
 }
