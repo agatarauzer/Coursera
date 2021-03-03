@@ -57,11 +57,9 @@ public class AutoCompleteDictionaryTrie implements  Dictionary, AutoComplete {
 	public int size()
 	{
 	    //TODO: Implement this method
-
 	    return size;
 	}
-	
-	
+
 	/** Returns whether the string is a word in the trie, using the algorithm
 	 * described in the videos for this week. */
 	@Override
@@ -156,7 +154,7 @@ public class AutoCompleteDictionaryTrie implements  Dictionary, AutoComplete {
  	{
  		if (curr == null) 
  			return;
- 		
+
  		System.out.println(curr.getText());
  		
  		TrieNode next = null;
