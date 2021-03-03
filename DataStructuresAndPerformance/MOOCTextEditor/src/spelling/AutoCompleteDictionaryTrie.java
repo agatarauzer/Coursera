@@ -66,6 +66,7 @@ public class AutoCompleteDictionaryTrie implements  Dictionary, AutoComplete {
 	public boolean isWord(String s) 
 	{
 		//TODO: Implement this method
+
 		s = s.toLowerCase();
 		TrieNode current = root;
 		for (char letter : s.toCharArray()) {
