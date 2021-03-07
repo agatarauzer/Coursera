@@ -46,8 +46,8 @@ public class NearbyWords implements SpellingSuggest {
 	 */
 	public void substitution(String s, List<String> currentList, boolean wordsOnly) {
 		// for each letter in the s and for all possible replacement characters
-		for(int index = 0; index < s.length(); index++){
-			for(int charCode = (int)'a'; charCode <= (int)'z'; charCode++) {
+		for (int index = 0; index < s.length(); index++){
+			for (int charCode = (int)'a'; charCode <= (int)'z'; charCode++) {
 				// use StringBuffer for an easy interface to permuting the 
 				// letters in the String
 				StringBuffer sb = new StringBuffer(s);
@@ -77,14 +77,14 @@ public class NearbyWords implements SpellingSuggest {
 	public void insertions(String s, List<String> currentList, boolean wordsOnly ) {
 		// TODO: Implement this method
 
-		for (int index = 0; index < s.length(); index++) {
-			for(int charCode = (int)'a'; charCode <= (int)'z'; charCode++) {
+        for (int index = 0; index <= s.length(); index++) {
+			for (int charCode = (int)'a'; charCode <= (int)'z'; charCode++) {
 				// use StringBuffer for an easy interface to permuting the
 				// letters in the String
 				StringBuffer sb = new StringBuffer(s);
 				sb.insert(index, (char)charCode);
 
-				if(!currentList.contains(sb.toString()) &&
+				if (!currentList.contains(sb.toString()) &&
 						(!wordsOnly||dict.isWord(sb.toString())) &&
 						!s.equals(sb.toString())) {
 					currentList.add(sb.toString());
@@ -110,7 +110,7 @@ public class NearbyWords implements SpellingSuggest {
 			StringBuffer sb = new StringBuffer(s);
 			sb.deleteCharAt(index);
 
-			if(!currentList.contains(sb.toString()) &&
+			if (!currentList.contains(sb.toString()) &&
 					(!wordsOnly||dict.isWord(sb.toString())) &&
 					!s.equals(sb.toString())) {
 				currentList.add(sb.toString());
@@ -139,20 +139,15 @@ public class NearbyWords implements SpellingSuggest {
 		// insert first node
 		queue.add(word);
 		visited.add(word);
-					
 		// TODO: Implement the remainder of this method, see assignment for algorithm
-
-        String curr = "";
-		while (!queue.isEmpty() && retList.size() < numSuggestions) {
-		    curr = queue.remove(0);
-
+		while (!queue.isEmpty() ) {
+		    String curr = queue.remove(0);
 		    List<String> neighbours = distanceOne(curr,true);
-
 		    for (String n : neighbours) {
 		        if (!visited.contains(n)) {
 		            visited.add(n);
 		            queue.add(n);
-		            if (dict.isWord(n)) {
+		            if (dict.isWord(n) && retList.size()  < numSuggestions) {
 		                retList.add(n);
                     }
                 }
