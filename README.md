@@ -21,7 +21,7 @@ Courses in progress:
 -  **Building Cloud Services with Java Spring Framework** by Vanderbilt University. Level: intermediate.
 
 
-1. ####**Java Programming: Solving Problems with Software** 
+1. ####Java Programming: Solving Problems with Software** 
 
    Conducted by Duke University. 
    
@@ -34,7 +34,7 @@ Courses in progress:
    More about course: https://www.coursera.org/learn/java-programming
    
 
-2. ####**Java Programming: Arrays, Lists, and Structured Data**
+2. ####Java Programming: Arrays, Lists, and Structured Data**
 
    Conducted by Duke University.
 
@@ -50,8 +50,9 @@ Courses in progress:
    More about course: https://www.coursera.org/learn/java-programming-arrays-lists-data
 
 
-3. ####**Object Oriented Programming in Java** 
-   Conducted by University of California San Diego. 
+3. ####Object Oriented Programming in Java** 
+   
+   Conducted by University of California San Diego.
    
    Level: intermediate.
 
@@ -66,7 +67,8 @@ Courses in progress:
    More about course: https://www.coursera.org/learn/object-oriented-java
    
 
-4. ####**Data Structures and Performance** 
+4. ####Data Structures and Performance** 
+   
    Conducted by University of California San Diego. 
    
    Level: intermediate.
@@ -77,4 +79,4 @@ Courses in progress:
    - Hash Maps: idea of hash tables, hash function, build-in classes
    - Course assignments: [Flesch Readibility Score](https://github.com/agatarauzer/Coursera/tree/master/DataStructuresAndPerformance/MOOCTextEditor/src/document), [Implement](https://github.com/agatarauzer/Coursera/blob/master/DataStructuresAndPerformance/MOOCTextEditor/src/textgen/MyLinkedList.java) and [test](https://github.com/agatarauzer/Coursera/blob/master/DataStructuresAndPerformance/MOOCTextEditor/src/textgen/MyLinkedListTester.java) a Linked List, [Markov Text Generator](https://github.com/agatarauzer/Coursera/blob/master/DataStructuresAndPerformance/MOOCTextEditor/src/textgen/MarkovTextGeneratorLoL.java), [Spell Checking](https://github.com/agatarauzer/Coursera/blob/master/DataStructuresAndPerformance/MOOCTextEditor/src/spelling/DictionaryBST.java) and [Autocomplete](https://github.com/agatarauzer/Coursera/blob/master/DataStructuresAndPerformance/MOOCTextEditor/src/spelling/AutoCompleteDictionaryTrie.java) (using trie data structure & breath first search), [Spelling Suggestions](https://github.com/agatarauzer/Coursera/blob/master/DataStructuresAndPerformance/MOOCTextEditor/src/spelling/NearbyWords.java) & [Word Paths](https://github.com/agatarauzer/Coursera/blob/master/DataStructuresAndPerformance/MOOCTextEditor/src/spelling/WPTree.java)
 
-More about course: https://www.coursera.org/learn/data-structures-optimizing-performance
+   More about course: https://www.coursera.org/learn/data-structures-optimizing-performance
