@@ -21,7 +21,7 @@ Courses in progress:
 -  **Building Cloud Services with Java Spring Framework** by Vanderbilt University. Level: intermediate.
 
 
-1. ####Java Programming: Solving Problems with Software** 
+1. #### Java Programming: Solving Problems with Software
 
    Conducted by Duke University. 
    
@@ -34,7 +34,7 @@ Courses in progress:
    More about course: https://www.coursera.org/learn/java-programming
    
 
-2. ####Java Programming: Arrays, Lists, and Structured Data**
+2. #### Java Programming: Arrays, Lists, and Structured Data
 
    Conducted by Duke University.
 
@@ -50,7 +50,7 @@ Courses in progress:
    More about course: https://www.coursera.org/learn/java-programming-arrays-lists-data
 
 
-3. ####Object Oriented Programming in Java** 
+3. #### Object Oriented Programming in Java
    
    Conducted by University of California San Diego.
    
@@ -67,7 +67,7 @@ Courses in progress:
    More about course: https://www.coursera.org/learn/object-oriented-java
    
 
-4. ####Data Structures and Performance** 
+4. #### Data Structures and Performance 
    
    Conducted by University of California San Diego. 
    
