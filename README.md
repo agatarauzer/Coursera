@@ -36,7 +36,27 @@ Completed courses:
 
    More about course: https://www.coursera.org/learn/object-oriented-java
    
-Courses in progress: 
-1. **Data Structures and Performance** by University of California San Diego. Level: intermediate. 
+
+4. **Data Structures and Performance** by University of California San Diego. Level: intermediate. 
+
+   - Working with Strings: String representation in Java, basic operations, build-in methods, regular expressions
+  
+      Assignment: Flesch Readibility Score
+  
+   - Efficiency Analysis and Benchmarking: Big-O notation, especially calculating the big-O class of code snippet; measuring execution time  
+   
+      Assignment: Making Flesch Score Calculation More Efiicient
+   - Interfaces, Linked Lists vs. Arrays, and Correctness: idea of abstraction, structure of Linked List, exceptions, unit testing     
+
+      Assignment: Implement and test a Linked List
+   - Trees, Binary Search Trees, Tries: definitions, BST traversals (pre-order, post-order, in-order, level-order)
+   
+      Assignment: Spell Checking and Autocomplete (using trie data structure & breath first search)
+   - Hash Maps: idea of hash tables, hash function, build-in classes
+   
+      Assignment: Spelling Suggestions & Word Paths
 
 More about course: https://www.coursera.org/learn/data-structures-optimizing-performance
+
+
+Courses in progress: 
