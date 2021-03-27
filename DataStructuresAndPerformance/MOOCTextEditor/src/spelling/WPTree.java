@@ -4,9 +4,7 @@
 package spelling;
 
 //import java.util.ArrayList;
-import java.util.HashSet;
-import java.util.LinkedList;
-import java.util.List;
+import java.util.*;
 
 /**
  * WPTree implements WordPath by dynamically creating a tree of words during a Breadth First
@@ -27,9 +25,9 @@ public class WPTree implements WordPath {
 	public WPTree () {
 		this.root = null;
 		// TODO initialize a NearbyWords object
-		// Dictionary d = new DictionaryHashSet();
-		// DictionaryLoader.loadDictionary(d, "data/dict.txt");
-		// this.nw = new NearbyWords(d);
+        Dictionary d = new DictionaryHashSet();
+		DictionaryLoader.loadDictionary(d, "DataStructuresAndPerformance/MOOCTextEditor/data/dict.txt");
+		this.nw = new NearbyWords(d);
 	}
 	
 	//This constructor will be used by the grader code
@@ -42,7 +40,30 @@ public class WPTree implements WordPath {
 	public List<String> findPath(String word1, String word2) 
 	{
 	    // TODO: Implement this method.
-	    return new LinkedList<String>();
+        List<WPTreeNode> queue = new LinkedList<>();
+        Set<String> visited = new HashSet<>();
+        root = new WPTreeNode(word1, null);
+        visited.add(word1);
+        queue.add(root);
+
+        while(!queue.isEmpty() && !visited.contains(word2)) {
+            WPTreeNode current = queue.remove(0);
+            List<String> neighbours = nw.distanceOne(current.getWord(), true);
+            if (neighbours.isEmpty()) {
+                return null;
+            }
+            for (String n : neighbours) {
+                if (!visited.contains(n)) {
+                    WPTreeNode nChild = current.addChild(n);
+                    visited.add(n);
+                    queue.add(nChild);
+                    if (n.equals(word2)) {
+                        return nChild.buildPathToRoot() ;
+                    }
+                }
+            }
+        }
+	    return null;
 	}
 	
 	// Method to print a list of WPTreeNodes (useful for debugging)
@@ -55,11 +76,10 @@ public class WPTree implements WordPath {
 		ret+= "]";
 		return ret;
 	}
-	
 }
 
 /* Tree Node in a WordPath Tree. This is a standard tree with each
- * node having any number of possible children.  Each node should only
+ * node having any number of possible children. Each node should only
  * contain a word in the dictionary and the relationship between nodes is
  * that a child is one character mutation (deletion, insertion, or
  * substitution) away from its parent
@@ -142,6 +162,5 @@ class WPTreeNode {
         ret+=(" ]\n");
         return ret;
     }
-
 }
 

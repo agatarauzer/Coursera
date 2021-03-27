@@ -1,10 +1,6 @@
 package spelling;
 
-import java.util.List;
-import java.util.Set;
-import java.util.Collection;
-import java.util.HashMap;
-import java.util.LinkedList;
+import java.util.*;
 
 /** 
  * An trie data structure that implements the Dictionary and the AutoComplete ADT
@@ -15,14 +11,12 @@ public class AutoCompleteDictionaryTrie implements  Dictionary, AutoComplete {
 
     private TrieNode root;
     private int size;
-    
 
     public AutoCompleteDictionaryTrie()
 	{
 		root = new TrieNode();
 	}
-	
-	
+
 	/** Insert a word into the trie.
 	 * For the basic part of the assignment (part 2), you should convert the 
 	 * string to all lower case before you insert it. 
@@ -39,8 +33,21 @@ public class AutoCompleteDictionaryTrie implements  Dictionary, AutoComplete {
 	 */
 	public boolean addWord(String word)
 	{
-	    //TODO: Implement this method.
-	    return false;
+		//TODO: Implement this method.
+		word = word.toLowerCase();
+		TrieNode current = root;
+		for (char letter : word.toCharArray()) {
+			if (current.getChild(letter) == null){
+				current.insert(letter);
+			}
+			current = current.getChild(letter);
+		}
+		if (!current.endsWord()) {
+			current.setEndsWord(true);
+			size++;
+			return true;
+		}
+		return false;
 	}
 	
 	/** 
@@ -50,17 +57,25 @@ public class AutoCompleteDictionaryTrie implements  Dictionary, AutoComplete {
 	public int size()
 	{
 	    //TODO: Implement this method
-	    return 0;
+	    return size;
 	}
-	
-	
+
 	/** Returns whether the string is a word in the trie, using the algorithm
 	 * described in the videos for this week. */
 	@Override
 	public boolean isWord(String s) 
 	{
-	    // TODO: Implement this method
-		return false;
+		//TODO: Implement this method
+
+		s = s.toLowerCase();
+		TrieNode current = root;
+		for (char letter : s.toCharArray()) {
+			if(current.getChild(letter) == null){
+				return false;
+			}
+			current = current.getChild(letter);
+		}
+		return current.endsWord();
 	}
 
 	/** 
@@ -100,8 +115,33 @@ public class AutoCompleteDictionaryTrie implements  Dictionary, AutoComplete {
     	 //       If it is a word, add it to the completions list
     	 //       Add all of its child nodes to the back of the queue
     	 // Return the list of completions
-    	 
-         return null;
+
+		 prefix = prefix.toLowerCase();
+		 TrieNode current = root;
+		 List<String> completions = new ArrayList<>();
+
+		 for (char letter : prefix.toCharArray()) {
+			 if (current.getChild(letter) == null){
+				 return completions;
+			 }
+			 current = current.getChild(letter);
+		 }
+
+		 Queue <TrieNode> queue = new LinkedList<>();
+		 queue.add(current);
+		 while (!queue.isEmpty()) {
+		 	TrieNode removed = queue.remove();
+		 	if (removed.endsWord() && numCompletions > 0) {
+		 		completions.add(removed.getText());
+				numCompletions--;
+			}
+		 	Set<Character> validCh = removed.getValidNextCharacters();
+		 	for (Character ch : validCh) {
+		 		TrieNode child = removed.getChild(ch);
+		 		queue.add(child);
+			 }
+		 }
+         return completions;
      }
 
  	// For debugging
@@ -115,7 +155,7 @@ public class AutoCompleteDictionaryTrie implements  Dictionary, AutoComplete {
  	{
  		if (curr == null) 
  			return;
- 		
+
  		System.out.println(curr.getText());
  		
  		TrieNode next = null;
@@ -124,7 +164,4 @@ public class AutoCompleteDictionaryTrie implements  Dictionary, AutoComplete {
  			printNode(next);
  		}
  	}
- 	
-
-	
 }

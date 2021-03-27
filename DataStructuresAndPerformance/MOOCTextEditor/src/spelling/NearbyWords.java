@@ -3,11 +3,7 @@
  */
 package spelling;
 
-import java.util.ArrayList;
-import java.util.HashSet;
-import java.util.LinkedList;
-import java.util.List;
-
+import java.util.*;
 
 /**
  * @author UC San Diego Intermediate MOOC team
@@ -50,8 +46,8 @@ public class NearbyWords implements SpellingSuggest {
 	 */
 	public void substitution(String s, List<String> currentList, boolean wordsOnly) {
 		// for each letter in the s and for all possible replacement characters
-		for(int index = 0; index < s.length(); index++){
-			for(int charCode = (int)'a'; charCode <= (int)'z'; charCode++) {
+		for (int index = 0; index < s.length(); index++){
+			for (int charCode = (int)'a'; charCode <= (int)'z'; charCode++) {
 				// use StringBuffer for an easy interface to permuting the 
 				// letters in the String
 				StringBuffer sb = new StringBuffer(s);
@@ -63,6 +59,9 @@ public class NearbyWords implements SpellingSuggest {
 						(!wordsOnly||dict.isWord(sb.toString())) &&
 						!s.equals(sb.toString())) {
 					currentList.add(sb.toString());
+					if (currentList.size() >= THRESHOLD) {
+						return;
+					}
 				}
 			}
 		}
@@ -76,7 +75,25 @@ public class NearbyWords implements SpellingSuggest {
 	 * @return
 	 */
 	public void insertions(String s, List<String> currentList, boolean wordsOnly ) {
-		// TODO: Implement this method  
+		// TODO: Implement this method
+
+        for (int index = 0; index <= s.length(); index++) {
+			for (int charCode = (int)'a'; charCode <= (int)'z'; charCode++) {
+				// use StringBuffer for an easy interface to permuting the
+				// letters in the String
+				StringBuffer sb = new StringBuffer(s);
+				sb.insert(index, (char)charCode);
+
+				if (!currentList.contains(sb.toString()) &&
+						(!wordsOnly||dict.isWord(sb.toString())) &&
+						!s.equals(sb.toString())) {
+					currentList.add(sb.toString());
+					if (currentList.size() >= THRESHOLD) {
+						return;
+					}
+				}
+			}
+		}
 	}
 
 	/** Add to the currentList Strings that are one character deletion away
@@ -88,6 +105,20 @@ public class NearbyWords implements SpellingSuggest {
 	 */
 	public void deletions(String s, List<String> currentList, boolean wordsOnly ) {
 		// TODO: Implement this method
+
+		for (int index = 0; index < s.length(); index++) {
+			StringBuffer sb = new StringBuffer(s);
+			sb.deleteCharAt(index);
+
+			if (!currentList.contains(sb.toString()) &&
+					(!wordsOnly||dict.isWord(sb.toString())) &&
+					!s.equals(sb.toString())) {
+				currentList.add(sb.toString());
+				if (currentList.size() >= THRESHOLD) {
+					return;
+				}
+			}
+		}
 	}
 
 	/** Add to the currentList Strings that are one character deletion away
@@ -100,38 +131,28 @@ public class NearbyWords implements SpellingSuggest {
 	public List<String> suggestions(String word, int numSuggestions) {
 
 		// initial variables
-		List<String> queue = new LinkedList<String>();     // String to explore
-		HashSet<String> visited = new HashSet<String>();   // to avoid exploring the same  
+		List<String> queue = new LinkedList<>();     // String to explore
+		HashSet<String> visited = new HashSet<>();   // to avoid exploring the same
 														   // string multiple times
-		List<String> retList = new LinkedList<String>();   // words to return
-		 
-		
+		List<String> retList = new LinkedList<>();   // words to return
+
 		// insert first node
 		queue.add(word);
 		visited.add(word);
-					
 		// TODO: Implement the remainder of this method, see assignment for algorithm
-		
+		while (!queue.isEmpty() ) {
+		    String curr = queue.remove(0);
+		    List<String> neighbours = distanceOne(curr,true);
+		    for (String n : neighbours) {
+		        if (!visited.contains(n)) {
+		            visited.add(n);
+		            queue.add(n);
+		            if (dict.isWord(n) && retList.size()  < numSuggestions) {
+		                retList.add(n);
+                    }
+                }
+            }
+		}
 		return retList;
-
-	}	
-
-   public static void main(String[] args) {
-	   /* basic testing code to get started
-	   String word = "i";
-	   // Pass NearbyWords any Dictionary implementation you prefer
-	   Dictionary d = new DictionaryHashSet();
-	   DictionaryLoader.loadDictionary(d, "data/dict.txt");
-	   NearbyWords w = new NearbyWords(d);
-	   List<String> l = w.distanceOne(word, true);
-	   System.out.println("One away word Strings for for \""+word+"\" are:");
-	   System.out.println(l+"\n");
-
-	   word = "tailo";
-	   List<String> suggest = w.suggestions(word, 10);
-	   System.out.println("Spelling Suggestions for \""+word+"\" are:");
-	   System.out.println(suggest);
-	   */
-   }
-
+	}
 }
