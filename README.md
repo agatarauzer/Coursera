@@ -16,10 +16,10 @@ Completed courses:
 
 - [**Data Structures and Performance** by University of California San Diego. Level: intermediate.](#data-structures-and-performance)
 - [**Foundations for Big Data Analysis with SQL** by Cloudera](#foundations-for-big-data-analysis-with-sql)
+- [**Analyzing Big Data with SQL** by Cloudera](#analyzing-big-data-with-sql)
 
 Courses in progress:
 -  **Building Cloud Services with Java Spring Framework** by Vanderbilt University. Level: intermediate.
--  **Analyzing Big Data with SQL** by Cloudera
 
 
 ---
@@ -98,4 +98,30 @@ Courses in progress:
    - Big Data: distributed storage and processing, structured, semi-structured and unstructured data, strengths and limitations of RDBMSs, SQL and data.
    - SQL Tools for BIG Data Analysis: data warehouses, NoSQL, Non-transactional structured systems, Big Data ACID-compliant RDBMSs, search engines, challenges.
 
-More about course: https://www.coursera.org/learn/foundations-big-data-analysis-sql?specialization=cloudera-big-data-analysis-sql
+   More about course: https://www.coursera.org/learn/foundations-big-data-analysis-sql?specialization=cloudera-big-data-analysis-sql
+
+6. #### Analyzing Big Data with SQL
+
+   Conducted by Cloudera.
+
+   Level: beginner.
+   - Orientation to SQL on Big Data: Use Hue to execute SQL statements, other interfaces examples
+   - SQL SELECT Essentials: 
+      - The SELECT List: expressions and operators, data types, column aliases, build-in functions, data type conversion, DISTINCT keyword
+      - The FROM Clause
+   - The WHERE Clause:
+      - Expressions in WHERE clause
+      - Operators and functions in WHERE clause: comparison operators, data types and precision, literal strings, logical operators
+      - Working with Missing Values: handling missing values, conditional functions
+   - Grouping and Aggregating Data
+      - Aggregate Operations: common aggregate functions, using in SELECT statement, interpreting aggregates
+      - The GROUP BY Clause: choosing an aggregate function and grouping column, grouping expressions
+      - NULL Values in Grouping and Aggregation
+      - The HAVING Clause
+   - Sorting and Limiting Data
+      - The ORDER BY Clause: Controlling sort order, ordering expressions, missing values in ordered results
+      - The LIMIT Clause: using LIMIT with ORDER BY, using LIMIT for pagination 
+   - Combining Data
+      - UNION and UNION ALL 
+      - Joins: syntax, inner joins, outer joins
+      - Advanced Joins: non-equijoins, cross joins, left-semi joins, specifying two or more join conditions
