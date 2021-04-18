@@ -3,9 +3,7 @@ import org.apache.commons.csv.CSVRecord;
 import predefinedClasses.FileResource;
 
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.Map;
+import java.util.*;
 
 public class FirstRatings {
 
@@ -74,6 +72,77 @@ public class FirstRatings {
                 System.out.println(d) ;
             }
         }
+    }
+    public ArrayList<Rater> loadRaters(String filename) {
+        ArrayList<Rater> raters = new ArrayList<>();
+        FileResource fr = new FileResource(filename);
+        CSVParser parser = fr.getCSVParser();
+        for (CSVRecord record : parser) {
+            String id = record.get("rater_id");
+            String movieId = record.get("movie_id");
+            double rating = Double.parseDouble(record.get("rating"));
+            boolean isInList = false;
+            for (Rater r : raters) {
+                String idR = r.getID();
+                if (id.equals(idR)) {
+                    r.addRating(movieId, rating);
+                    isInList = true;
+                }
+            }
+            if (!isInList) {
+                Rater newRater = new Rater(id);
+                newRater.addRating(movieId, rating);
+                raters.add(newRater);
+            }
+        }
+        return raters;
+    }
+
+    public void testLoadRaters() {
+        ArrayList<Rater> raters = loadRaters("ratings.csv");
+        System.out.println("Number of raters: " + raters.size());
+        int maxNumberOfRatings = 0;
+        String idOfRaterWithMax = "";
+        Set<String> distinctMovies = new HashSet<>();
+        for (Rater r : raters) {
+            int numberOfRatings = r.numRatings();
+            if (numberOfRatings > maxNumberOfRatings) {
+                maxNumberOfRatings = numberOfRatings;
+                idOfRaterWithMax = r.getID();
+            }
+            System.out.println("Rater id: " + r.getID() + " , number of ratings: " + numberOfRatings);
+            System.out.println("       Ratings: ");
+            ArrayList<String> ratedMovies = r.getItemsRated();
+            for (String movieId : ratedMovies) {
+                System.out.println("       Movie id: " + movieId + ", rating: " + r.getRating(movieId));
+                if (!distinctMovies.contains(movieId)) {
+                    distinctMovies.add(movieId);
+                }
+            }
+        }
+        System.out.println("Maximum number of ratings: " + maxNumberOfRatings + " by rater: " + idOfRaterWithMax);
+
+        System.out.println("Find the number of ratings for rater by id...");
+        String searchedRaterId = "193";
+        for (Rater r : raters) {
+            if (r.getID().equals(searchedRaterId)) {
+                System.out.println("Rater with id " + searchedRaterId + " has done " + r.numRatings() + " ratings");
+            }
+        }
+
+        System.out.println("Find the number of ratings for movie by id...");
+        String searchedMovieId = "1798709";
+        int counterOfRatings = 0;
+        for (Rater r : raters) {
+            ArrayList<String> ratedMovies = r.getItemsRated();
+            for (String movieId : ratedMovies) {
+                if (movieId.equals(searchedMovieId)) {
+                    counterOfRatings++;
+                }
+            }
+        }
+        System.out.println("Movie with id: " + searchedMovieId + " has " + counterOfRatings + " ratings");
+        System.out.println("Number of different movies: " + distinctMovies.size());
     }
 
     public static void main (String[] args) {
