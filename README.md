@@ -6,20 +6,24 @@
 
 
 Completed courses:
-- [**Java Programming: Solving Problems with Software** by Duke University.
+
+Java: 
+1. [**Java Programming: Solving Problems with Software** by Duke University.
   Level: beginner.](#java-programming-solving-problems-with-software)
 
-- [**Java Programming: Arrays, Lists, and Structured Data**
+2. [**Java Programming: Arrays, Lists, and Structured Data**
   by Duke University. Level: beginner.](#java-programming-arrays-lists-and-structured-data)
 
-- [**Object Oriented Programming in Java** by University of California San Diego. Level: intermediate.](#object-oriented-programming-in-java)
+3. [**Object Oriented Programming in Java** by University of California San Diego. Level: intermediate.](#object-oriented-programming-in-java)
 
-- [**Data Structures and Performance** by University of California San Diego. Level: intermediate.](#data-structures-and-performance)
-- [**Foundations for Big Data Analysis with SQL** by Cloudera](#foundations-for-big-data-analysis-with-sql)
-- [**Analyzing Big Data with SQL** by Cloudera](#analyzing-big-data-with-sql)
+4. [**Data Structures and Performance** by University of California San Diego. Level: intermediate.](#data-structures-and-performance)
+
+SQL: 
+5. [**Foundations for Big Data Analysis with SQL** by Cloudera](#foundations-for-big-data-analysis-with-sql)
+6. [**Analyzing Big Data with SQL** by Cloudera](#analyzing-big-data-with-sql)
 
 Courses in progress:
--  **Building Cloud Services with Java Spring Framework** by Vanderbilt University. Level: intermediate.
+-  **Java Programming: Build a Recommendation System** by Duke University. Level: intermediate.
 
 
 ---
