@@ -9,7 +9,7 @@ import java.util.ArrayList;
 
 public class SecondRatings {
     private ArrayList<Movie> myMovies;
-    private ArrayList<Rater> myRaters;
+    private ArrayList<EfficientRater> myRaters;
 
     public SecondRatings() {
         // default constructor
