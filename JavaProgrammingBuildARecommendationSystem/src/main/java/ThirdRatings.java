@@ -5,7 +5,7 @@ public class ThirdRatings {
 
     public ThirdRatings() {
         // default constructor
-        this("ratings.csv");
+        this("ratings_short.csv");
     }
 
     public ThirdRatings(String ratingsfile) {
@@ -40,8 +40,20 @@ public class ThirdRatings {
         ArrayList<Rating> avgForMovies = new ArrayList<>();
         for (String id : movies) {
             double averageRating = getAverageByID(id, minimalRaters);
-            avgForMovies.add(new Rating(id, averageRating));
+            if (averageRating != 0.0) {
+                avgForMovies.add(new Rating(id, averageRating));
+            }
         }
         return avgForMovies;
+    }
+
+    public ArrayList<Rating> getAverageRatingsByFilter(int minimalRaters, Filter filterCriteria) {
+        ArrayList<Rating> avgForFilteredMovies = new ArrayList<>();
+        ArrayList<String> moviesIds = MovieDatabase.filterBy(filterCriteria);
+        for (String id : moviesIds) {
+            Rating rating = new Rating(id, getAverageByID(id, minimalRaters));
+            avgForFilteredMovies.add(rating);
+        }
+        return avgForFilteredMovies;
     }
 }
