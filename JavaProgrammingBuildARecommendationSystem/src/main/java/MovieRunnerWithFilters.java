@@ -28,10 +28,42 @@ public class MovieRunnerWithFilters {
         }
     }
 
+    public void printAverageRatingsByGenre() {
+        ThirdRatings thirdRatings = new ThirdRatings();
+        GenreFilter genreFilter = new GenreFilter("Crime");
+        ArrayList<Rating> filteredMovies = thirdRatings.getAverageRatingsByFilter(1, genreFilter);
+        Collections.sort(filteredMovies);
+        for (Rating r : filteredMovies) {
+            System.out.println(r.getValue() + " " + MovieDatabase.getTitle(r.getItem()) + "\n    " + MovieDatabase.getGenres(r.getItem()));
+        }
+    }
+
+    public void printAverageRatingsByMinutes() {
+        ThirdRatings thirdRatings = new ThirdRatings();
+        MinutesFilter minutesFilter = new MinutesFilter(110, 170);
+        ArrayList<Rating> filteredMovies = thirdRatings.getAverageRatingsByFilter(1, minutesFilter);
+        Collections.sort(filteredMovies);
+        for (Rating r : filteredMovies) {
+            System.out.println(r.getValue() + " Time:  " + MovieDatabase.getMinutes(r.getItem()) + "  " + MovieDatabase.getTitle(r.getItem()));
+        }
+    }
+
+    public void printAverageRatingsByDirectors() {
+        ThirdRatings thirdRatings = new ThirdRatings();
+        DirectorsFilter directorsFilter = new DirectorsFilter("Charles Chaplin,Michael Mann,Spike Jonze");
+        ArrayList<Rating> filteredMovies = thirdRatings.getAverageRatingsByFilter(1, directorsFilter);
+        Collections.sort(filteredMovies);
+        for (Rating r : filteredMovies) {
+            System.out.println(r.getValue() + " " + MovieDatabase.getTitle(r.getItem()) + "\n    " + MovieDatabase.getDirector(r.getItem()));
+        }
+    }
 
     public static void main(String[] args) {
         MovieRunnerWithFilters movieRunnerWithFilters = new MovieRunnerWithFilters();
         //movieRunnerWithFilters.printAverageRatings();
-        movieRunnerWithFilters.printAverageRatingsByYear();
+        //movieRunnerWithFilters.printAverageRatingsByYear();
+        //movieRunnerWithFilters.printAverageRatingsByGenre();
+        movieRunnerWithFilters.printAverageRatingsByMinutes();
+        //movieRunnerWithFilters.printAverageRatingsByDirectors();
     }
 }
