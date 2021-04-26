@@ -5,7 +5,7 @@ public class ThirdRatings {
 
     public ThirdRatings() {
         // default constructor
-        this("ratings_short.csv");
+        this("ratings.csv");
     }
 
     public ThirdRatings(String ratingsfile) {
