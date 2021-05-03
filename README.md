@@ -19,8 +19,13 @@ Java:
 4. [**Data Structures and Performance** by University of California San Diego. Level: intermediate.](#data-structures-and-performance)
 
 SQL: 
+
 5. [**Foundations for Big Data Analysis with SQL** by Cloudera](#foundations-for-big-data-analysis-with-sql)
+
 6. [**Analyzing Big Data with SQL** by Cloudera](#analyzing-big-data-with-sql)
+
+7. [**Advanced Relational Database and SQL** - Guided Project](#advanced-relational-database-and-sql)
+
 
 Courses in progress:
 -  **Java Programming: Build a Recommendation System** by Duke University. Level: intermediate.
@@ -105,7 +110,7 @@ Courses in progress:
    More about course: https://www.coursera.org/learn/foundations-big-data-analysis-sql?specialization=cloudera-big-data-analysis-sql
 
 6. #### Analyzing Big Data with SQL
-
+   
    Conducted by Cloudera.
 
    Level: beginner.
@@ -129,3 +134,15 @@ Courses in progress:
       - UNION and UNION ALL 
       - Joins: syntax, inner joins, outer joins
       - Advanced Joins: non-equijoins, cross joins, left-semi joins, specifying two or more join conditions
+    
+
+7. ####Advanced Relational Database and SQL 
+   Guided Project
+
+    - Server functions
+    - Stored functions
+    - Stored procedures
+    - Triggers
+    - Common table expressions
+    - Recursive common table expressions
+    
