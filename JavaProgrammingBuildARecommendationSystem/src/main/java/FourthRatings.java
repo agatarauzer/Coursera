@@ -1,5 +1,6 @@
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.HashMap;
 
 public class FourthRatings {
 
@@ -11,46 +12,45 @@ public class FourthRatings {
         RaterDatabase.initialize(fileName);
     }
 
-    public double getAverageByID(String movieId, int minimalRaters) {
-        int counter = 0;
-        int ratingsSum = 0;
-        for (Rater currRater :RaterDatabase.getRaters()) {
-            ArrayList<String> ratedMovies = currRater.getItemsRated();
-            for (String currMovie : ratedMovies) {
-                if (currMovie.equals(movieId)) {
-                    ratingsSum += currRater.getRating(currMovie);
-                    counter++;
+    public ArrayList<Rating> getSimilarRatings(String id, int numSimilarRaters, int minimalRaters) {
+        return getSimilarRatingsByFilter(id, numSimilarRaters, minimalRaters, null);
+    }
+
+    public ArrayList<Rating> getSimilarRatingsByFilter(String id, int numSimilarRaters, int minimalRaters, Filter filterCriteria) {
+        ArrayList<Rating> similarRaters = getSimilarities(id);
+        HashMap<String, Double> weightedRatingsForMovies = new HashMap<>();
+        HashMap<String, Integer> counterRatingsForMovies = new HashMap<>();
+        ArrayList<Rating> moviesToRecommend = new ArrayList<>();
+        for (int i = 0; i < numSimilarRaters; i++) {
+            String similarRaterId = similarRaters.get(i).getItem();
+            double similarRaterDotProduct = similarRaters.get(i).getValue();
+            Rater raterData = RaterDatabase.getRater(similarRaterId);
+            ArrayList<String> moviesRated = raterData.getItemsRated();
+            for (String movieId : moviesRated) {
+                if (filterCriteria == null || filterCriteria.satisfies(movieId)) {
+                    double weightedRating = raterData.getRating(movieId) * similarRaterDotProduct;
+                    if (!weightedRatingsForMovies.containsKey(movieId)) {
+                        weightedRatingsForMovies.put(movieId, weightedRating);
+                        counterRatingsForMovies.put(movieId, 1);
+                    }
+                    else {
+                        double actualWeightedRating = weightedRatingsForMovies.get(movieId) + weightedRating;
+                        weightedRatingsForMovies.put(movieId, actualWeightedRating);
+                        int actualCounter = counterRatingsForMovies.get(movieId) + 1;
+                        counterRatingsForMovies.put(movieId, actualCounter);
+                    }
                 }
             }
         }
-        if (counter >= minimalRaters) {
-            return (double) ratingsSum / counter;
-        }
-        return 0.00;
-    }
-
-    public ArrayList<Rating> getAverageRatings(int minimalRaters) {
-        ArrayList<String> movies = MovieDatabase.filterBy(new TrueFilter());
-        ArrayList<Rating> avgForMovies = new ArrayList<>();
-        for (String id : movies) {
-            double averageRating = getAverageByID(id, minimalRaters);
-            if (averageRating != 0.0) {
-                avgForMovies.add(new Rating(id, averageRating));
+        for (String movieId : weightedRatingsForMovies.keySet()) {
+            int counter = counterRatingsForMovies.get(movieId);
+            if (counter >= minimalRaters) {
+                double weightedAvg = weightedRatingsForMovies.get(movieId) / counter;
+                moviesToRecommend.add(new Rating(movieId, weightedAvg));
             }
         }
-        return avgForMovies;
-    }
-
-    public ArrayList<Rating> getAverageRatingsByFilter(int minimalRaters, Filter filterCriteria) {
-        ArrayList<Rating> avgForFilteredMovies = new ArrayList<>();
-        ArrayList<String> moviesIds = MovieDatabase.filterBy(filterCriteria);
-        for (String id : moviesIds) {
-            double averageRating = getAverageByID(id, minimalRaters);
-            if (averageRating != 0.0) {
-                avgForFilteredMovies.add(new Rating(id, averageRating));
-            }
-        }
-        return avgForFilteredMovies;
+        Collections.sort(moviesToRecommend, Collections.reverseOrder());
+        return moviesToRecommend;
     }
 
     private double dotProduct(Rater me, Rater rater) {
@@ -77,17 +77,5 @@ public class FourthRatings {
         }
         Collections.sort(list, Collections.reverseOrder());
         return list;
-    }
-
-    public ArrayList<Rating> getSimilarRatings(String id, int numSimilarRaters, int minimalRaters) {
-
-        ArrayList<Rating> similarRaters = getSimilarities(id);
-        ArrayList<Rating> moviesToRecommend = new ArrayList<>();
-
-        //for (int i = 0; i < numSimilarRaters; i++) {
-
-        //}
-
-        return moviesToRecommend;
     }
 }
