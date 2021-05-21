@@ -2,7 +2,7 @@
 
 
 
-#### This repository contains materials from Coursera courses. It means exactly my own solutions of tasks and assignments from following courses, only to track my learning progress.
+#### This repository contains materials from Coursera courses. It means, exactly my own solutions of tasks and assignments from following courses, only to track my learning progress.
 
 
 Completed courses:
@@ -18,17 +18,20 @@ Java:
 
 4. [**Data Structures and Performance** by University of California San Diego. Level: intermediate.](#data-structures-and-performance)
 
+5. [**Java Programming: Build a Recommendation System** by Duke University. Level: intermediate.]
+
+
 SQL: 
 
-5. [**Foundations for Big Data Analysis with SQL** by Cloudera](#foundations-for-big-data-analysis-with-sql)
+6. [**Foundations for Big Data Analysis with SQL** by Cloudera](#foundations-for-big-data-analysis-with-sql)
 
-6. [**Analyzing Big Data with SQL** by Cloudera](#analyzing-big-data-with-sql)
+7. [**Analyzing Big Data with SQL** by Cloudera](#analyzing-big-data-with-sql)
 
-7. [**Advanced Relational Database and SQL** - Guided Project](#advanced-relational-database-and-sql)
+8. [**Advanced Relational Database and SQL** - Guided Project](#advanced-relational-database-and-sql)
 
 
-Courses in progress:
--  **Java Programming: Build a Recommendation System** by Duke University. Level: intermediate.
+
+
 
 
 ---
@@ -96,7 +99,24 @@ Courses in progress:
    More about course: https://www.coursera.org/learn/data-structures-optimizing-performance
 
 
-5. #### Foundations for Big Data Analysis with SQL
+5. #### Java Programming: Build a Recommendation System
+
+   Conducted by Duke University.
+
+   Level: intermediate.
+   
+   Course was focused on building a recommendation system, using given input files on users ratings and movie titles. 
+   It covers following steps:
+   - Read in and parse data into lists and maps.
+   - Calculate average ratings.
+   - Calculate how similar a given rater is to another user based on ratings.
+   - Recommend movies to a given user based on ratings. 
+   - Display recommended movies for a given user on a webpage.
+   
+  More about course: https://www.coursera.org/learn/java-programming-recommender
+
+
+6. #### Foundations for Big Data Analysis with SQL
 
    Conducted by Cloudera.
    
@@ -109,7 +129,7 @@ Courses in progress:
 
    More about course: https://www.coursera.org/learn/foundations-big-data-analysis-sql?specialization=cloudera-big-data-analysis-sql
 
-6. #### Analyzing Big Data with SQL
+7. #### Analyzing Big Data with SQL
    
    Conducted by Cloudera.
 
@@ -136,7 +156,7 @@ Courses in progress:
       - Advanced Joins: non-equijoins, cross joins, left-semi joins, specifying two or more join conditions
     
 
-7. ####Advanced Relational Database and SQL 
+8. #### Advanced Relational Database and SQL 
    Guided Project
 
     - Server functions
