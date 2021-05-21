@@ -18,7 +18,7 @@ Java:
 
 4. [**Data Structures and Performance** by University of California San Diego. Level: intermediate.](#data-structures-and-performance)
 
-5. [**Java Programming: Build a Recommendation System** by Duke University. Level: intermediate.]
+5. [**Java Programming: Build a Recommendation System** by Duke University. Level: intermediate.](#java-programming-build-a-recommendation-system)
 
 
 SQL: 
@@ -113,7 +113,7 @@ SQL:
    - Recommend movies to a given user based on ratings. 
    - Display recommended movies for a given user on a webpage.
    
-  More about course: https://www.coursera.org/learn/java-programming-recommender
+    More about course: https://www.coursera.org/learn/java-programming-recommender
 
 
 6. #### Foundations for Big Data Analysis with SQL
