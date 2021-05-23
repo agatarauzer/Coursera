@@ -40,9 +40,8 @@ SQL:
 
 1. #### Java Programming: Solving Problems with Software
 
-   Conducted by Duke University.
-
-   Level: beginner.
+   Conducted by Duke University / Level: beginner / 17 hours
+   
    - Fundamental Java syntax and semantics
    - Strings in Java
    - CSV files and basic statistics in Java
@@ -53,9 +52,7 @@ SQL:
 
 2. #### Java Programming: Arrays, Lists, and Structured Data
 
-   Conducted by Duke University.
-
-   Level: beginner.
+   Conducted by Duke University /  Level: beginner / 14 hours
 
    - Working with strings
    - Arrays
@@ -69,9 +66,7 @@ SQL:
 
 3. #### Object Oriented Programming in Java
 
-   Conducted by University of California San Diego.
-
-   Level: intermediate.
+   Conducted by University of California San Diego / Level: intermediate / 39 hours
 
    - Classes and objects
    - Memory models
@@ -86,9 +81,8 @@ SQL:
 
 4. #### Data Structures and Performance
 
-   Conducted by University of California San Diego.
+   Conducted by University of California San Diego /  Level: intermediate / 42 hours
 
-   Level: intermediate.
    - Working with Strings: String representation in Java, basic operations, build-in methods, regular expressions
    - Efficiency Analysis and Benchmarking: Big-O notation, especially calculating the big-O class of code snippet; measuring execution time
    - Interfaces, Linked Lists vs. Arrays, and Correctness: idea of abstraction, structure of Linked List, exceptions, unit testing
@@ -101,10 +95,9 @@ SQL:
 
 5. #### Java Programming: Build a Recommendation System
 
-   Conducted by Duke University.
+   Conducted by Duke University /  Level: intermediate / 5 hours
 
-   Level: intermediate.
-   
+
    Course was focused on building a recommendation system, using given input files on users ratings and movie titles. 
    It covers following steps:
    - Read in and parse data into lists and maps.
@@ -118,22 +111,20 @@ SQL:
 
 6. #### Foundations for Big Data Analysis with SQL
 
-   Conducted by Cloudera.
-   
-   Level: beginner.
+   Conducted by Cloudera / Level: beginner / 12 hours
 
    - Data and Databases: basic definitions - data, organization of data, DBMS, RDBMSs, operational and analytic databases  
    - Relation Databases and SQL: table schemas, NULL values, data types, primary and foreign keys, database normalization, database transactions, ACID
    - Big Data: distributed storage and processing, structured, semi-structured and unstructured data, strengths and limitations of RDBMSs, SQL and data.
    - SQL Tools for BIG Data Analysis: data warehouses, NoSQL, Non-transactional structured systems, Big Data ACID-compliant RDBMSs, search engines, challenges.
 
-   More about course: https://www.coursera.org/learn/foundations-big-data-analysis-sql?specialization=cloudera-big-data-analysis-sql
+    More about course: https://www.coursera.org/learn/foundations-big-data-analysis-sql?specialization=cloudera-big-data-analysis-sql
 
 7. #### Analyzing Big Data with SQL
    
-   Conducted by Cloudera.
+   Conducted by Cloudera /  Level: beginner / 18 hours 
 
-   Level: beginner.
+  
    - Orientation to SQL on Big Data: Use Hue to execute SQL statements, other interfaces examples
    - SQL SELECT Essentials: 
       - The SELECT List: expressions and operators, data types, column aliases, build-in functions, data type conversion, DISTINCT keyword
@@ -154,10 +145,12 @@ SQL:
       - UNION and UNION ALL 
       - Joins: syntax, inner joins, outer joins
       - Advanced Joins: non-equijoins, cross joins, left-semi joins, specifying two or more join conditions
-    
+      
+     More about course: https://www.coursera.org/learn/cloudera-big-data-analysis-sql-queries
 
 8. #### Advanced Relational Database and SQL 
-   Guided Project
+
+   Guided Project - Coursera Project Network / Level: advanced / 1.5 hours
 
     - Server functions
     - Stored functions
@@ -165,4 +158,7 @@ SQL:
     - Triggers
     - Common table expressions
     - Recursive common table expressions
+
+    More about course: https://www.coursera.org/projects/advanced-rdb-sql
+
     
